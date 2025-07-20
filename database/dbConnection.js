@@ -1,14 +1,20 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+// Load .env variables
+dotenv.config();
 
 export const dbConnection = () => {
   mongoose
     .connect(process.env.MONGO_URI, {
       dbName: "HOSPITAL_MANAGEMENT_SYSTEM",
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     })
     .then(() => {
-      console.log("Connected to database!");
+      console.log("✅ Connected to database!");
     })
     .catch((err) => {
-      console.log("Some error occured while connecting to database:", err);
+      console.error("❌ Some error occurred while connecting to database:", err);
     });
 };
